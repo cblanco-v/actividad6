@@ -1,7 +1,7 @@
 <section>
     <div class="container-fluid">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
-            @for (user of users.slice(0,10); track user.id) {
+            @for (user of users; track user.id) {
                 <div class="col d-flex justify-content-center">
                     <app-usuario-card [usuario]="user"></app-usuario-card>
                 </div>

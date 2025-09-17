@@ -13,7 +13,7 @@ export class UsuariosService {
     const urlParam = (url==="") ? this.urlAPI : url
     return lastValueFrom(this.httpClient.get<any>(urlParam))
   }
-  getUsuarioById(id: number):Promise <any>{
+  getUsuarioById(id: string):Promise <any>{
     return lastValueFrom(this.httpClient.get<any>(`${this.urlAPI}${id}`))
 
   }
