@@ -22,3 +22,7 @@ export interface IUserResponse {
   total_pages: number;
   results: IUser[];
 }
+
+export interface IError{
+  error:string
+}

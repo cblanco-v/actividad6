@@ -1,26 +1,26 @@
 <section class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
 	<div class="card shadow-sm rounded-4 border-0" style="max-width: 1100px; width: 100%;">
 			<div class="card-body px-5 py-2" style="font-size: 1rem;">
-				<h2 class="card-title mb-3 text-center" style="font-size: 1.5rem;">NUEVO USUARIO</h2>
-				<form>
+				<h2 class="card-title mb-3 text-center" style="font-size: 1.5rem;">{{title}} Usuario</h2>
+				<form [formGroup]="userForm" (ngSubmit)="getDataForm()">
 					<div class="mb-2">
 						<label for="firstName" class="form-label">Nombre Usuario</label>
-						<input type="text" class="form-control" id="firstName" name="firstName" placeholder="Nombre" required>
+						<input type="text" class="form-control" id="firstName" name="firstName" placeholder="Nombre" formControlName="first_name">
 					</div>
 					<div class="mb-2">
 						<label for="lastName" class="form-label">Apellido Usuario</label>
-						<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellidos" required>
+						<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellidos"formControlName="last_name">
 					</div>
 					<div class="mb-2">
 						<label for="email" class="form-label">Email Usuario</label>
-						<input type="email" class="form-control" id="email" name="email" placeholder="correo@ejemplo.com" required>
+						<input type="email" class="form-control" id="email" name="email" placeholder="correo@ejemplo.com"formControlName="email">
 					</div>
 					<div class="mb-2">
 						<label for="image" class="form-label">Imagen Usuario</label>
-						<input type="url" class="form-control" id="image" name="image" placeholder="https://...">
+						<input type="url" class="form-control" id="image" name="image" placeholder="https://..."formControlName="image">
 					</div>
 					<div class="d-flex justify-content-center gap-3 mt-3">
-						<button type="submit" class="btn btn-warning">Guardar</button>
+						<input type="submit" class="btn btn-warning" [value]="title">
 					</div>
 				</form>
 			</div>

@@ -8,5 +8,6 @@ export const routes: Routes = [
     {path:"home", component:ListaUsuarios },
     {path: "users/:id", component: UserViewComponent },
     {path: "newuser", component:UsuarioFormComponent},
+    {path: "updateuser/:id", component: UsuarioFormComponent},
     {path:"**", redirectTo: "home"}
 ];

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import { IError, IUser } from '../interfaces/iusuario.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,21 @@ export class UsuariosService {
 
   }
 
-  getApiUrl(){
-    return this.urlAPI
+  changePage(nPage: number):Promise <any>{
+    return lastValueFrom(this.httpClient.get<any>(`${this.urlAPI}?page=${nPage}`))
   }
+
+  remove(id:string): Promise <IUser|IError>{
+    return lastValueFrom(this.httpClient.delete<IUser|any>(`${this.urlAPI}${id}`))
+  }
+
+  insert(user:IUser):Promise <IUser>{
+    return lastValueFrom(this.httpClient.post<IUser>(this.urlAPI, user))
+  }
+
+  update (user:IUser):Promise <IUser>{
+    return lastValueFrom(this.httpClient.put<IUser>(`${this.urlAPI}${user._id}`, user))
+  }
+   
   
 }
