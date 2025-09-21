@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { IUser, IUserResponse } from '../../interfaces/iusuario.interfaces';
 import { UsuariosService } from '../../services/usuarios.service';
 import { UsuarioCardComponent } from '../../components/usuario-card/usuario-card.component';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -50,6 +52,11 @@ export class ListaUsuarios {
     }
   }
   getMensajeOK(event:string){
-    alert(event)
+    Swal.fire({
+  title: event,
+  icon: "success",
+  draggable: true
+});
+   
   }
 }

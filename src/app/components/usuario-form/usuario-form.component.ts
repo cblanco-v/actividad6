@@ -1,8 +1,10 @@
 import { Component, inject, Input } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsuariosService } from '../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { IUser } from '../../interfaces/iusuario.interfaces';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-usuario-form',
@@ -19,32 +21,55 @@ export class UsuarioFormComponent {
   user: IUser | any;
   constructor() {
     this.userForm = new FormGroup({
-      first_name: new FormControl('', []),
-      last_name: new FormControl('', []),
+      first_name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),        
+      ]),
+      last_name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),]),      
       email: new FormControl('', []),
       image: new FormControl('', []),
     });
   }
 
   async getDataForm() {
-    try {
-      if (this.userForm.value._id) {//update
-        const resp = await this.srv.update(this.userForm.value);
-        if (resp) {
-          this.router.navigate(['/home']);
-          alert('Usuario actualizado');
-        }
-      } else { //create
-        const resp = await this.srv.insert(this.userForm.value);
-        if (resp) {
-          this.router.navigate(['/home']);
-          alert('Usuario creado');
-        }
+  try {
+    if (this.userForm.value._id) { 
+      // update
+      const resp = await this.srv.update(this.userForm.value);
+      if (resp) {
+        this.router.navigate(['/home']);
+        await Swal.fire({
+          title: 'Usuario actualizado',
+          icon: 'success',
+          draggable: true,
+          confirmButtonColor: '#3085d6' // opcional: color botón
+        });
       }
-    } catch (msg) {
-      console.log(msg);
+    } else { 
+      // create
+      const resp = await this.srv.insert(this.userForm.value);
+      if (resp) {
+        this.router.navigate(['/home']);
+        await Swal.fire({
+          title: 'Usuario creado',
+          icon: 'success',
+          draggable: true,
+          confirmButtonColor: '#3085d6'
+        });
+      }
     }
+  } catch (msg) {
+    console.log(msg);
+    Swal.fire({
+      title: 'Error',
+      text: 'Hubo un problema con la operación',
+      icon: 'error',
+      confirmButtonColor: '#d33'
+    });
   }
+}
   async ngOnInit() {
     if (this.id) {
       this.title = 'Actualizar';
