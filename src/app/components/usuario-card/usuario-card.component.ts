@@ -34,7 +34,7 @@ export class UsuarioCardComponent {
         if (!resp.error) {
           await Swal.fire({
             title: '¡Eliminado!',
-            text: 'El usuario ha sido eliminado.',
+            text: 'El usuario ha sido eliminado',
             icon: 'success',
             confirmButtonColor: '#ffc107'
           });

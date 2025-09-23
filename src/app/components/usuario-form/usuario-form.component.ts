@@ -23,13 +23,19 @@ export class UsuarioFormComponent {
     this.userForm = new FormGroup({
       first_name: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),        
+        Validators.minLength(3)       
       ]),
       last_name: new FormControl('', [
         Validators.required,
         Validators.minLength(2),]),      
-      email: new FormControl('', []),
-      image: new FormControl('', []),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)
+      ]),
+      image: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^https?:\/\//)
+      ]),
     });
   }
 
@@ -71,16 +77,35 @@ export class UsuarioFormComponent {
   }
 }
   async ngOnInit() {
+    console.log('a'+this.userForm.valid)
     if (this.id) {
       this.title = 'Actualizar';
       this.user = await this.srv.getUsuarioById(this.id);
       this.userForm = new FormGroup({
         _id: new FormControl(this.user._id, []),
-        first_name: new FormControl(this.user.first_name, []),
-        last_name: new FormControl(this.user.last_name, []),
-        email: new FormControl(this.user.email, []),
-        image: new FormControl(this.user.image, []),
+        first_name: new FormControl(this.user.first_name, [
+          Validators.required,
+          Validators.minLength(3) 
+        ]),
+        last_name: new FormControl(this.user.last_name, [
+          Validators.required,
+          Validators.minLength(2) 
+        ]),
+        email: new FormControl(this.user.email, [
+          Validators.required,
+          Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)
+        ]),
+        image: new FormControl(this.user.image, [
+          Validators.required,
+          Validators.pattern(/^https?:\/\//)
+        ]),
       });
     }
+    console.log('b' + this.userForm.valid)
+  }
+
+  checkForm(errorName: string, campoName: string): boolean | undefined{
+    return this.userForm.get(campoName)?.hasError(errorName) && this.userForm.get(campoName)?.touched
+
   }
 }
