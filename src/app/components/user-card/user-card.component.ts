@@ -1,22 +1,29 @@
-import { Component, EventEmitter, inject, Input, input, Output } from '@angular/core';
-import { IError, IUser } from '../../interfaces/iusuario.interfaces';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  input,
+  Output,
+} from '@angular/core';
+import { IError, IUser } from '../../interfaces/iuser.interfaces';
 import { RouterLink } from '@angular/router';
-import { UsuariosService } from '../../services/usuarios.service';
-import Swal from 'sweetalert2'
+import { UserService } from '../../services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuario-card',
   imports: [RouterLink],
-  templateUrl: './usuario-card.component.html',
-  styleUrl: './usuario-card.component.css',
+  templateUrl: './user-card.component.html',
+  styleUrl: './user-card.component.css',
 })
-export class UsuarioCardComponent {
-  @Input() user!: IUser
+export class UserCardComponent {
+  @Input() user!: IUser;
   usuario = input<IUser>();
-  srv = inject(UsuariosService);
-  @Output() usuarioBorrado: EventEmitter <string> = new EventEmitter()
+  srv = inject(UserService);
+  @Output() deletedUser: EventEmitter<string> = new EventEmitter();
 
-  async borrarUsuario(id: string) {
+  async deteleUser(id: string) {
     const result = await Swal.fire({
       title: '¿Estás seguro?',
       text: '¿Deseas borrar al usuario?',
@@ -25,9 +32,9 @@ export class UsuarioCardComponent {
       confirmButtonColor: '#ffc107',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     });
-  
+
     if (result.isConfirmed) {
       try {
         const resp: any = await this.srv.remove(id);
@@ -36,7 +43,7 @@ export class UsuarioCardComponent {
             title: '¡Eliminado!',
             text: 'El usuario ha sido eliminado',
             icon: 'success',
-            confirmButtonColor: '#ffc107'
+            confirmButtonColor: '#ffc107',
           });
         } else {
           Swal.fire('Error', resp.error, 'error');
@@ -47,5 +54,4 @@ export class UsuarioCardComponent {
       }
     }
   }
-
 }

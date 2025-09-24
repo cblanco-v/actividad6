@@ -1,9 +1,3 @@
-export interface IUsuario {
-}
-
-interface IResponse {
-
-}
 export interface IUser {
   _id: string;
   id: number;
@@ -23,6 +17,6 @@ export interface IUserResponse {
   results: IUser[];
 }
 
-export interface IError{
-  error:string
+export interface IError {
+  error: string;
 }

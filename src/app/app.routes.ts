@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { ListaUsuarios } from './pages/lista-usuarios/lista-usuarios';
+import { UserList } from './pages/lista-usuarios/user-list';
 import { UserViewComponent } from './pages/user-view/user-view.component';
-import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
+import { UserFormComponent } from './pages/user-form/user-form.component';
 
 export const routes: Routes = [
     {path:"",pathMatch:'full', redirectTo: 'home'},
-    {path:"home", component:ListaUsuarios },
+    {path:"home", component:UserList },
     {path: "users/:id", component: UserViewComponent },
-    {path: "newuser", component:UsuarioFormComponent},
-    {path: "updateuser/:id", component: UsuarioFormComponent},
+    {path: "newuser", component:UserFormComponent},
+    {path: "updateuser/:id", component: UserFormComponent},
     {path:"**", redirectTo: "home"}
 ];

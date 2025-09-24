@@ -3,7 +3,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
             @for (user of users; track user.id) {
                 <div class="col d-flex justify-content-center">
-                    <app-usuario-card [user]="user" (usuarioBorrado)="getMensajeOK($event)"></app-usuario-card>
+                    <app-usuario-card [user]="user" (deletedUser)="getMensajeOK($event)"></app-usuario-card>
                 </div>
             }
         </div>
