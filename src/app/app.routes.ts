@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { UserList } from './pages/lista-usuarios/user-list';
+import { UserList } from './pages/user-list/user-list';
 import { UserViewComponent } from './pages/user-view/user-view.component';
 import { UserFormComponent } from './pages/user-form/user-form.component';
 
